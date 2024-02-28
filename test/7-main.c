@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "binary_trees.h"
+#include "../binary_trees.h"
 
 /**
  * print_num - Prints a number
@@ -30,6 +30,6 @@ int main(void)
     root->right->right = binary_tree_node(root->right, 512);
 
     binary_tree_print(root);
-    binary_tree_preorder(root, &print_num);
+    binary_tree_inorder(root, &print_num);
     return (0);
 }
