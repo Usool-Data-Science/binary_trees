@@ -1,1 +1,4 @@
 *.txt
+*.o
+binary_tree_height_remnant.c
+binary_tree_height_remnant
