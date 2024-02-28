@@ -2,7 +2,8 @@
 #define _BINARY_TREES_H
 
 #include <stddef.h>
-
+#include <stdio.h>
+#include <stdlib.h>
 
 /*********** Basic Binary Tree ************************/
 /**
