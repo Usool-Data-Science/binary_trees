@@ -25,16 +25,12 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	{
 		binary_tree_t *temp = queue[++front];
 
-		/* If a non-full node is encountered after a full node*/
-		/*.., the tree is not complete*/
 		if (temp->left == NULL && temp->right != NULL)
 		{
 			free(queue);
 			return (0);
 		}
 
-		/* If a node has only one child*/
-		/*.., it must be the last level and it must be a left child*/
 		if (flag && (temp->left != NULL || temp->right != NULL))
 		{
 			free(queue);
@@ -45,13 +41,11 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 			queue[++rear] = temp->left;
 		else
 			flag = true;
-			/* Set flag when encountering a non-full node*/
 		/* Enqueue right child*/
 		if (temp->right != NULL)
 			queue[++rear] = temp->right;
 		else
 			flag = true;
-			/* Set flag when encountering a non-full node*/
 	}
 	free(queue);
 	return (1);
