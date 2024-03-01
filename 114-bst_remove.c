@@ -52,16 +52,13 @@ bst_t *bst_remove(bst_t *root, int value)
 			return (temp);
 		}
 
-		/* Node with two children: Get the in-order successor (smallest*/
-		   /*..in the right subtree) */
 		temp = min_value_node(root->right);
 
 		/* Copy the in-order successor's content to this node */
 		root->n = temp->n;
 
-		/* Delete the in-order successor */
+		/* Recursively remove the in-order successor from the right subtree */
 		root->right = bst_remove(root->right, temp->n);
 	}
 	return (root);
 }
-
