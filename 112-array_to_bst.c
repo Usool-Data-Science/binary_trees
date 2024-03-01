@@ -10,7 +10,7 @@
 bst_t *array_to_bst(int *array, size_t size)
 {
 	bst_t *root = NULL;
-	size_t i;
+	size_t i, j;
 
 	if (array == NULL || size == 0)
 		return (NULL);
@@ -18,9 +18,18 @@ bst_t *array_to_bst(int *array, size_t size)
 	/* Insert each element of the array into the BST */
 	for (i = 0; i < size; i++)
 	{
-		if (bst_insert(&root, array[i]) == NULL)
+		for (j = 0; j < i; j++)
 		{
-			return (NULL);
+			if (array[j] == array[i])
+				break;
+		}
+		if (j == i)
+		{
+
+			if (bst_insert(&root, array[i]) == NULL)
+			{
+				return (NULL);
+			}
 		}
 	}
 
