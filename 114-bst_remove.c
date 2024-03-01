@@ -1,44 +1,31 @@
 #include "binary_trees.h"
 
 /**
- * min_value_node - Finds node with the minimum value in a BST.
- * @node: A pointer to the root node of the BST or a subtree.
- * Return: A pointer to the node with the minimum value in the BST.
-*/
-bst_t *min_value_node(bst_t *node)
-{
-	bst_t *current = node;
-
-	/* Find the leftmost leaf node */
-	while (current && current->left != NULL)
-		current = current->left;
-
-	return (current);
-}
-
-/**
- * bst_remove - Removes a node from a Binary Search Tree (BST).
- * @root: Pointer to the root node of the tree where the node will be removed.
- * @value: The value to remove from the tree.
- * Return: Pointer to the new root node of tree after removing desired value.
+ * bst_remove - Removes a node with a specific value from a binary search tree.
+ * @root: A pointer to the root node of the BST to remove a node from.
+ * @value: The value to remove in the BST.
+ * Return: A pointer to the new root node after deletion.
  */
 bst_t *bst_remove(bst_t *root, int value)
 {
 	bst_t *temp;
+	bst_t *successor;
 
 	if (root == NULL)
-		return (root);
+	{
+		return (NULL);
+	}
 
-	/* Search for the node with the value to be deleted */
 	if (value < root->n)
+	{
 		root->left = bst_remove(root->left, value);
+	}
 	else if (value > root->n)
+	{
 		root->right = bst_remove(root->right, value);
+	}
 	else
 	{
-		/* Node with the value to be deleted found */
-
-		/* Node with only one child or no child */
 		if (root->left == NULL)
 		{
 			temp = root->right;
@@ -52,13 +39,12 @@ bst_t *bst_remove(bst_t *root, int value)
 			return (temp);
 		}
 
-		temp = min_value_node(root->right);
+		successor = root->right;
+		while (successor->left != NULL)
+			successor = successor->left;
 
-		/* Copy the in-order successor's content to this node */
-		root->n = temp->n;
-
-		/* Recursively remove the in-order successor from the right subtree */
-		root->right = bst_remove(root->right, temp->n);
+		root->n = successor->n;
+		root->right = bst_remove(root->right, successor->n);
 	}
 	return (root);
 }
